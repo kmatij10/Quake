@@ -11,6 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using Quake.Data.Database;
+using Quake.Api.Extensions;
 
 namespace Quake
 {
@@ -28,9 +30,11 @@ namespace Quake
         {
             services.AddControllers();
 
-            /*services.AddDbContext<Quake>(options =>
+            services.AddDbContext<QuakeContext>(options =>
             options.UseSqlServer(Configuration["ConnectionStrings:Default"])
-            );*/
+            );
+
+            services.RegisterScopedServices();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
