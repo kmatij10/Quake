@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using Quake.Data.Database;
 using Quake.Api.Extensions;
+using AutoMapper;
 
 namespace Quake
 {
@@ -35,6 +36,7 @@ namespace Quake
             );
 
             services.RegisterScopedServices();
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

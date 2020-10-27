@@ -7,7 +7,6 @@ using Quake.Data.Entities;
 
 namespace Quake.Api.Controllers
 {
-    [ApiController]
     [Route("api/buildings")]
     public class BuildingController : BaseController
     {
