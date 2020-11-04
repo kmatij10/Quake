@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="intro mx-auto text-center">
+        <h2 class="mt-3 font-weight-bold">Lokacije oštećenih zgrada</h2>
+        <p class="mt-3">Svi podaci su izmišljeni. Stranica je isključivo edukativne prirode.</p>
+    </div>
+    <div class="col-sm-6 mx-auto">
+        <div class="input-group">
+            <input [(ngModel)]="searchText" type="text" class="form-control"
+                placeholder="Upišite tekst za pretraživanje" (keyup.enter)="vm.page=1; loadBuildings()" />
+            <div class="input-group-append">
+                <div class="input-group-text"><i class="fas fa-search-location"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5" *ngIf="vm">
+        <div class="col-sm-6 col-md-4 item mt-3"
+            *ngFor="let b of vm.buildings | paginate: { itemsPerPage: vm.perPage, currentPage: vm.page, id: 'history', totalItems: vm.count };">
+            <a [routerLink]="['/buildings/', b.id]" routerLinkActive="active">
+                <img class="img-fluid" src="https://picsum.photos/200/300" />
+            </a>
+            <h3 class="address font-weight-bold text-capitalize mt-3">{{ b.address }}</h3>
+            <p class="description mt-4">
+                {{ b.description }}
+            </p>
+            <a [routerLink]="['/buildings/', b.id]" routerLinkActive="active" class="action text-center mt-3 d-block">
+                <i class="fa fa-arrow-circle-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <pagination-controls class="pagination" *ngIf="vm"
+        (pageChange)="vm.page = $event; loadBuildings()"
+        id="history">
+    </pagination-controls>
+
+    <div id="map"></div>
+
+    <div class="text-center">
+        <a class="btn btn-primary mb-5" [routerLink]="['new']" title="Dodaj novu lokaciju">Dodaj novu lokaciju</a>
+    </div>
+</div>

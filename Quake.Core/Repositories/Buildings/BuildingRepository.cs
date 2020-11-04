@@ -9,7 +9,7 @@ namespace Quake.Core.Repositories.Buildings
     public class BuildingRepository : IBuildingRepository
     {
         private readonly QuakeContext context;
-
+        public int PerPage { get; set; } = 5;
         public BuildingRepository(QuakeContext context)
         {
             this.context = context;
@@ -17,7 +17,15 @@ namespace Quake.Core.Repositories.Buildings
 
         public IEnumerable<Building> GetAll(string search)
         {
-            return this.context.Buildings.ToList();
+            var query = this.context.Buildings.AsQueryable();
+            if (!string.IsNullOrEmpty(search))
+            {
+                query = query.Where(
+                    b => b.Address.Contains(search) ||
+                    b.Description.Contains(search)
+                );
+            }
+            return query.ToList();
         }
         public Building GetOne(long id)
         {
@@ -44,6 +52,38 @@ namespace Quake.Core.Repositories.Buildings
             this.context.SaveChanges();
 
             return newBuilding;
+        }
+
+        public List<Building> GetPaginatedBuildings(int page, string search, string sort)
+        {
+            var query = this.context.Buildings.AsQueryable();
+
+            if(!string.IsNullOrEmpty(search))
+            {
+                query = query.Where(b => b.Address.Contains(search) || b.Description.Contains(search));
+            }
+
+            if(!string.IsNullOrEmpty(sort))
+            {
+                string[] elements = sort.Split(":"); 
+                query = query.OrderByDescending(b => b.Address);
+            }
+
+            return query.Skip((page - 1) * this.PerPage)
+            .Take(this.PerPage)
+            .ToList();
+        }
+
+        public int Count(string search)
+        {
+            var query = this.context.Buildings.AsQueryable();
+
+            if(!string.IsNullOrEmpty(search))
+            {
+                return query.Count(b => b.Address.Contains(search) || b.Description.Contains(search));
+            }
+
+            return query.Count();
         }
     }
 }
