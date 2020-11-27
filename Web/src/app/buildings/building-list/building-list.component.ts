@@ -12,7 +12,6 @@ import { Building } from '../building';
 })
 export class BuildingListComponent implements OnInit {
 
-  buildings: Building[] = [];
   /* view model -> buildings and metadata are loaded here */
   vm: BuildingListResponse = { page: 1 } as BuildingListResponse;
   searchText?: string;
@@ -34,11 +33,12 @@ export class BuildingListComponent implements OnInit {
       .getBuildings(params)
       .subscribe(response => {
         this.vm = response;
+        this.initMap();
     });
   }
 
   initMap() {
-    this.map = Leaflet.map('map').setView([45.800440, 15.994100], 13);
+    this.map = Leaflet.map('map').setView([45.800440, 15.994100], 14);
     Leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: 'edupala.com © Angular LeafLet',
     }).addTo(this.map);
@@ -63,27 +63,31 @@ export class BuildingListComponent implements OnInit {
       shadowAnchor: [4, 62],  // the same for the shadow
       popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
+    var yellowIcon = Leaflet.icon({
+      iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-orange.png',
+      shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+  
+      iconSize:     [38, 95], // size of the icon
+      shadowSize:   [50, 64], // size of the shadow
+      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      shadowAnchor: [4, 62],  // the same for the shadow
+      popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+    });
 
-    // Leaflet.marker([28.6, 77]).addTo(this.map).bindPopup('Delhi').openPopup();
-     //Leaflet.marker([34, 77],{icon: greenIcon}).addTo(this.map).bindPopup('<b>Leh').openPopup();
-    this.buildings.forEach(element => {
+    this.vm.buildings.forEach(element => {
       if (element.cardId == 3) {
-        Leaflet.marker([element.lat,element.lng],{icon: greenIcon}).bindPopup(this.getPopupTextGreen(element)).addTo(this.map); 
+        Leaflet.marker([element.lat,element.lng],{icon: greenIcon}).bindPopup(this.getPopupText(element)).addTo(this.map); 
       } 
+      else if (element.cardId == 2) {
+        Leaflet.marker([element.lat,element.lng],{icon: yellowIcon}).bindPopup(this.getPopupText(element)).addTo(this.map);
+      }
       else if (element.cardId == 1) {
-        Leaflet.marker([element.lat,element.lng],{icon: redIcon}).bindPopup(this.getPopupTextRed(element)).addTo(this.map);
+        Leaflet.marker([element.lat,element.lng],{icon: redIcon}).bindPopup(this.getPopupText(element)).addTo(this.map);
       }
     });
   }
 
-  getPopupTextGreen(building: Building): string {
-    let result = `Building ${building.id}<br />`;
-    result += `Address: <b>${building.address}</b><br />`;
-    result += `View <a href="${this.getPopupLink(building)}">Details</a>`
-    return result;
-  }
-
-  getPopupTextRed(building: Building): string {
+  getPopupText(building: Building): string {
     let result = `Building ${building.id}<br />`;
     result += `Address: <b>${building.address}</b><br />`;
     result += `View <a href="${this.getPopupLink(building)}">Details</a>`

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Quake.Data.Entities;
+#nullable enable
 
 namespace Quake.Core.Repositories.Buildings
 {

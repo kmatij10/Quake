@@ -28,17 +28,18 @@ namespace Quake.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<PaginatedBuildingResponse> GetAll([FromQuery] PaginatedBuildingRequest request)
+        public ActionResult<PaginatedBuildingResponse> GetAllPaginated([FromQuery] PaginatedBuildingRequest request)
         {
             var buildings = this.buildingService.GetPaginatedResponse(request);
             return Ok(buildings);
         }
         
-        /*public ActionResult<IEnumerable<Building>> GetAll([FromQuery] string search)
+        [HttpGet]
+        public ActionResult<IEnumerable<Building>> GetAll([FromQuery] string search)
         {
             var building = this.buildingRepository.GetAll(search);
             return Ok(building);
-        }*/
+        }
 
         [HttpGet("{id}")]
         public ActionResult<Building> GetOne(long id)

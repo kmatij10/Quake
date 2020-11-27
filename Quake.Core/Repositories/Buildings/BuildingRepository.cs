@@ -9,13 +9,13 @@ namespace Quake.Core.Repositories.Buildings
     public class BuildingRepository : IBuildingRepository
     {
         private readonly QuakeContext context;
-        public int PerPage { get; set; } = 5;
+        public int PerPage { get; set; } = 6;
         public BuildingRepository(QuakeContext context)
         {
             this.context = context;
         }
 
-        public IEnumerable<Building> GetAll(string search)
+        /*public IEnumerable<Building> GetAll(string search)
         {
             var query = this.context.Buildings.AsQueryable();
             if (!string.IsNullOrEmpty(search))
@@ -26,7 +26,13 @@ namespace Quake.Core.Repositories.Buildings
                 );
             }
             return query.ToList();
+        }*/
+
+        public IEnumerable<Building> GetAll(string search)
+        {
+            return this.context.Buildings.ToList();
         }
+
         public Building GetOne(long id)
         {
             return this.context.Buildings.Where(c => c.Id == id).Single();

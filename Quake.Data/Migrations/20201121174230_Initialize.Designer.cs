@@ -9,7 +9,7 @@ using Quake.Data.Database;
 namespace Quake.Data.Migrations
 {
     [DbContext(typeof(QuakeContext))]
-    [Migration("20201104111546_Initialize")]
+    [Migration("20201121174230_Initialize")]
     partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
