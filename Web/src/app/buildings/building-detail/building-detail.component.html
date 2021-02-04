@@ -1,5 +1,20 @@
-<div *ngIf="building">
-    <h1>{{ building.address }}</h1>
-    <p>{{ building.description }}</p>
-    <img class="img-fluid" src="https://picsum.photos/200/300" />
+<div class="container pt-5" id="detail">
+    <div class="row justify-content-md-center" *ngIf="building">
+        <div class="col-md-auto">
+            <img class="img-fluid" src="https://picsum.photos/200/300" />
+        </div>
+        <div class="col-md-auto flex-center text-center">
+            <div *ngIf="red">
+                <img class="img-fluid" src="/assets/damage3.png" />
+            </div>
+            <div *ngIf="yellow">
+                <img class="img-fluid" src="/assets/damage2.png" />
+            </div>
+            <div *ngIf="green">
+                <img class="img-fluid" src="/assets/damage1.png" />
+            </div>
+            <h2>{{ building.address }}</h2>
+            <p>{{ building.description }}</p>
+        </div>
+    </div>
 </div>

@@ -44,39 +44,36 @@ export class BuildingListComponent implements OnInit {
     }).addTo(this.map);
 
     var greenIcon = Leaflet.icon({
-      iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-green.png',
-      shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+      iconUrl: '/assets/location3.png',
   
-      iconSize:     [38, 95], // size of the icon
+      iconSize:     [20, 30], // size of the icon
       shadowSize:   [50, 64], // size of the shadow
-      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      iconAnchor:   [10, 29], // point of the icon which will correspond to marker's location
       shadowAnchor: [4, 62],  // the same for the shadow
       popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
     var redIcon = Leaflet.icon({
-      iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-red.png',
-      shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+      iconUrl: '/assets/location.png',
   
-      iconSize:     [38, 95], // size of the icon
+      iconSize:     [20, 30], // size of the icon
       shadowSize:   [50, 64], // size of the shadow
-      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      iconAnchor:   [10, 29], // point of the icon which will correspond to marker's location
       shadowAnchor: [4, 62],  // the same for the shadow
       popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
     var yellowIcon = Leaflet.icon({
-      iconUrl: 'https://leafletjs.com/examples/custom-icons/leaf-orange.png',
-      shadowUrl: 'https://leafletjs.com/examples/custom-icons/leaf-shadow.png',
+      iconUrl: '/assets/location2.png',
   
-      iconSize:     [38, 95], // size of the icon
+      iconSize:     [20, 30], // size of the icon
       shadowSize:   [50, 64], // size of the shadow
-      iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+      iconAnchor:   [10, 29], // point of the icon which will correspond to marker's location
       shadowAnchor: [4, 62],  // the same for the shadow
       popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
     });
 
     this.vm.buildings.forEach(element => {
       if (element.cardId == 3) {
-        Leaflet.marker([element.lat,element.lng],{icon: greenIcon}).bindPopup(this.getPopupText(element)).addTo(this.map); 
+        Leaflet.marker([element.lat,element.lng],{icon: greenIcon}).bindPopup(this.getPopupText(element)).addTo(this.map);
       } 
       else if (element.cardId == 2) {
         Leaflet.marker([element.lat,element.lng],{icon: yellowIcon}).bindPopup(this.getPopupText(element)).addTo(this.map);
@@ -88,9 +85,9 @@ export class BuildingListComponent implements OnInit {
   }
 
   getPopupText(building: Building): string {
-    let result = `Building ${building.id}<br />`;
-    result += `Address: <b>${building.address}</b><br />`;
-    result += `View <a href="${this.getPopupLink(building)}">Details</a>`
+    let result = `Građevina broj ${building.id}<br />`;
+    result += `Adresa: <b>${building.address}</b><br />`;
+    result += `Vidi <a href="${this.getPopupLink(building)}">Detalje</a>`
     return result;
   }
 

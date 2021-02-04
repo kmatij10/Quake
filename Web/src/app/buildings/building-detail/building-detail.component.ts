@@ -12,6 +12,10 @@ export class BuildingDetailComponent implements OnInit {
 
   building?: Building;
   id!: number;
+  card: number;
+  red: boolean;
+  yellow: boolean;
+  green: boolean;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -30,6 +34,20 @@ export class BuildingDetailComponent implements OnInit {
       .getBuilding(this.id)
       .subscribe(result => {
         this.building = result;
+        this.card = result.cardId;
+        if(result.cardId == 1) {
+          this.red = true;
+          this.yellow = false;
+          this.green = false;
+        } else if(result.cardId == 2) {
+          this.red = false;
+          this.yellow = true;
+          this.green = false;
+        } else {
+          this.red = false;
+          this.yellow = false;
+          this.green = true;
+        }
       });
   }
 

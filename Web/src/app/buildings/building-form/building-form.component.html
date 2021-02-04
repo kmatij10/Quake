@@ -1,0 +1,94 @@
+<div class="col-sm-6 mx-auto">
+    <form [formGroup]="buildingForm" (ngSubmit)="onSubmit()">
+      <input type="hidden" formControlName="id">
+  
+      <!-- address -->
+      <div class="form-group">
+        <label for="address">Adresa</label>
+        <input
+          type="text"
+          formControlName="address"
+          class="form-control"
+          id="address"
+          [ngClass]="{'error-border': errors && errors.Address }"
+          placeholder="Unesite adresu ...">
+          <span class="error-msg" *ngIf="errors && errors.Address">{{ errors.Address }}</span>
+      </div>
+  
+      <!-- description -->
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          class="form-control"
+          formControlName="description"
+          id="description"
+          [ngClass]="{'error-border': errors && errors.Description }"
+          rows="10">Opis ...</textarea>
+          <span class="error-msg" *ngIf="errors && errors.Description">{{ errors.Description }}</span>
+      </div>
+  
+  
+      <div class="form-row">
+  
+        <!-- city -->
+        <div class="col-md-6">
+          <div class="col-auto my-2">
+            <label for="city">Grad</label>
+            <select
+              class="custom-select mr-sm-2"
+              formControlName="cityId"
+              id="city">
+                <option [value]="1">Zagreb</option>
+                <option [value]="2">Karlovac</option>
+            </select>
+          </div>
+        </div>
+  
+        <!-- cards -->
+        <div class="col-md-6">
+          <div class="col-auto my-2">
+            <label for="card">Kartica</label>
+            <select
+              class="custom-select mr-sm-2"
+              name="card"
+              formControlName="cardId"
+              id="card">
+              <option [value]="1">Crvena</option>
+              <option [value]="2">Žuta</option>
+              <option [value]="3">Zelena</option>
+            </select>
+          </div>
+        </div>
+  
+      </div>
+
+      <!-- lat -->
+      <div class="form-group">
+        <label for="lat">Latitude</label>
+        <input
+          type="number"
+          formControlName="lat"
+          class="form-control"
+          id="lat"
+          [ngClass]="{'error-border': errors && errors.Latitude }"
+          placeholder="Unesite Latitudu ...">
+          <span class="error-msg" *ngIf="errors && errors.Latitude">{{ errors.Latitude }}</span>
+      </div>
+  
+      <!-- lng -->
+      <div class="form-group">
+        <label for="lng">Longitude</label>
+        <input
+          type="number"
+          formControlName="lng"
+          class="form-control"
+          id="lng"
+          [ngClass]="{'error-border': errors && errors.Longitude }"
+          placeholder="Unesite Longitudu ...">
+          <span class="error-msg" *ngIf="errors && errors.Longitude">{{ errors.Longitude }}</span>
+      </div>
+
+      <button type="submit" [disabled]="!buildingForm.valid" class="float-right ml-3 mt-5 btn btn-primary">Save</button>
+      <button type="reset" class="float-right mt-5 btn btn-link">Clear</button>
+    </form>
+  </div>

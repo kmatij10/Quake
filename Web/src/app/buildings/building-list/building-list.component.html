@@ -1,9 +1,16 @@
-<div class="container">
-    <div class="intro mx-auto text-center">
-        <h2 class="mt-3 font-weight-bold">Lokacije oštećenih zgrada</h2>
-        <p class="mt-3">Svi podaci su izmišljeni. Stranica je isključivo edukativne prirode.</p>
+<header class="masthead">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-12 text-center">
+          <img src="/assets/earthMap.png" alt="earthMap" id="earthMap">
+          <p class="lead">Svi podaci su izmišljeni, stranica je korištena u edukativne svrhe.</p>
+        </div>
+      </div>
     </div>
-    <div class="col-sm-6 mx-auto">
+</header>
+
+<div class="container pt-3">
+    <div class="mt-5 col-sm-6 mx-auto">
         <div class="input-group">
             <input [(ngModel)]="searchText" type="text" class="form-control"
                 placeholder="Upišite tekst za pretraživanje" (keyup.enter)="vm.page=1; loadBuildings()" />
@@ -19,7 +26,7 @@
                 <img class="img-fluid" src="https://picsum.photos/200/300" />
             </a>
             <h3 class="address font-weight-bold text-capitalize mt-3">{{ b.address }}</h3>
-            <p class="description mt-4">
+            <p class="description mt-4" *ngIf="damage">
                 {{ b.description }}
             </p>
             <a [routerLink]="['/buildings/', b.id]" routerLinkActive="active" class="action text-center mt-3 d-block">
@@ -40,6 +47,6 @@
     </div>
 
     <div class="text-center">
-        <a class="btn btn-primary mb-5" [routerLink]="['new']" title="Dodaj novu lokaciju">Dodaj novu lokaciju</a>
+        <a class="btn btn-light mb-5" [routerLink]="['new']" title="Dodaj novu lokaciju">Dodaj novu lokaciju</a>
     </div>
 </div>

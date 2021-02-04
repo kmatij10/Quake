@@ -1,7 +1,24 @@
 footer {
-    background-color:#FCDC0A;
+    background-color:whitesmoke;
 }
 
 .footer-copyright {
-    background-color: #F2BC0A;
+    background-color: whitesmoke;
 }
+
+
+
+#main {
+    background-image: url('/assets/gradientBackground2.png'), url('/assets/outline1.png'), url('/assets/outline2.png');
+    background-size: cover, auto, auto;
+    background-position: center, left, right bottom;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+}
+
+.page-footer a:link { color: #C4C4C4 }
+.page-footer a:visited { color: #C4C4C4 }
+.page-footer a:hover { 
+    color: #6E6E6E;
+    text-decoration: none;
+}
+.page-footer a:active { color: #6E6E6E }
